@@ -195,6 +195,11 @@ app.whenReady().then(() => {
     ipcMain.handle('app:openFilePath', async (event, filePath) => {
         return openFile(filePath);
     });
+
+    ipcMain.handle('app:adjustZoom', (event, delta) => {
+        const zoomLevel = mainWindow.webContents.getZoomLevel();
+        mainWindow.webContents.setZoomLevel(zoomLevel + delta);
+    });
 });
 
 app.on('window-all-closed', () => {

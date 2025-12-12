@@ -249,3 +249,12 @@ document.addEventListener('drop', async (e) => {
         }
     }
 });
+
+// Zoom Support (Ctrl + Wheel)
+document.addEventListener('wheel', (e) => {
+    if (e.ctrlKey) {
+        e.preventDefault();
+        const delta = e.deltaY > 0 ? -0.5 : 0.5;
+        window.electronAPI.adjustZoom(delta);
+    }
+}, { passive: false });
