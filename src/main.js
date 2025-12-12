@@ -11,7 +11,10 @@ const store = new Store({
         font: 'Inter',
         fontSize: 14,
         lineHeight: 1.6,
+        lineHeight: 1.6,
         letterSpacing: 0,
+        customBackgroundColor: '#ffffff',
+        customTextColor: '#000000',
         recentFiles: []
     }
 });
@@ -170,6 +173,9 @@ app.whenReady().then(() => {
         }
         // Added these listeners in previous turn, keep them consistent if needed for syncing windows or just renderer specific
         if (key === 'lineHeight' || key === 'letterSpacing') {
+            mainWindow.webContents.send('settings-changed', { key, value });
+        }
+        if (key === 'customBackgroundColor' || key === 'customTextColor') {
             mainWindow.webContents.send('settings-changed', { key, value });
         }
     });

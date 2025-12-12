@@ -14,6 +14,9 @@ const lineHeightRange = document.getElementById('line-height-range');
 const lineHeightValue = document.getElementById('line-height-value');
 const letterSpacingRange = document.getElementById('letter-spacing-range');
 const letterSpacingValue = document.getElementById('letter-spacing-value');
+const customColorsGroup = document.getElementById('custom-colors-group');
+const customBgColorInput = document.getElementById('custom-bg-color');
+const customTextColorInput = document.getElementById('custom-text-color');
 
 // Initial Load
 async function init() {
@@ -23,8 +26,10 @@ async function init() {
     const fontSize = await window.electronAPI.getSettings('fontSize') || 14;
     const lineHeight = await window.electronAPI.getSettings('lineHeight') || 1.6;
     const letterSpacing = await window.electronAPI.getSettings('letterSpacing') || 0;
+    const customBg = await window.electronAPI.getSettings('customBackgroundColor') || '#ffffff';
+    const customText = await window.electronAPI.getSettings('customTextColor') || '#000000';
 
-    applyTheme(theme);
+    applyTheme(theme, customBg, customText);
     applyFont(font);
     applyFontSize(fontSize);
     applyLineHeight(lineHeight);
@@ -100,10 +105,40 @@ if (letterSpacingRange) {
     });
 }
 
+customBgColorInput.addEventListener('input', async (e) => {
+    const val = e.target.value;
+    window.electronAPI.setSettings('customBackgroundColor', val);
+    applyTheme('custom', val, customTextColorInput.value);
+});
+
+customTextColorInput.addEventListener('input', async (e) => {
+    const val = e.target.value;
+    window.electronAPI.setSettings('customTextColor', val);
+    applyTheme('custom', customBgColorInput.value, val);
+});
+
 // Application Logic
-function applyTheme(theme) {
+function applyTheme(theme, customBg, customText) {
     document.body.className = ''; // reset
-    if (theme !== 'dark') document.body.classList.add(`theme-${theme}`);
+
+    if (theme === 'custom') {
+        document.body.classList.add('theme-custom');
+        customColorsGroup.style.display = 'block';
+        if (customBg) {
+            document.documentElement.style.setProperty('--bg-color', customBg);
+            customBgColorInput.value = customBg;
+        }
+        if (customText) {
+            document.documentElement.style.setProperty('--text-color', customText);
+            customTextColorInput.value = customText;
+        }
+    } else {
+        customColorsGroup.style.display = 'none';
+        if (theme !== 'dark') document.body.classList.add(`theme-${theme}`);
+        // Reset custom vars
+        document.documentElement.style.removeProperty('--bg-color');
+        document.documentElement.style.removeProperty('--text-color');
+    }
 }
 
 function applyFont(font) {
@@ -157,6 +192,14 @@ window.electronAPI.onSettingsChanged((event, { key, value }) => {
             letterSpacingValue.textContent = value + 'px';
         }
         applyLetterSpacing(value);
+    }
+    if (key === 'customBackgroundColor') {
+        customBgColorInput.value = value;
+        if (themeSelect.value === 'custom') applyTheme('custom', value, customTextColorInput.value);
+    }
+    if (key === 'customTextColor') {
+        customTextColorInput.value = value;
+        if (themeSelect.value === 'custom') applyTheme('custom', customBgColorInput.value, value);
     }
 });
 

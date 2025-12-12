@@ -51,7 +51,22 @@
               <option value="dark">Dark</option>
               <option value="light">Light</option>
               <option value="sepia">Sepia</option>
+              <option value="custom">Custom</option>
             </select>
+          </div>
+
+          <div class="setting-group" id="custom-colors-group" style="display: none;">
+            <label>Custom Colors</label>
+            <div style="display: flex; gap: 10px; margin-top: 5px;">
+              <div style="flex: 1;">
+                <label style="font-size: 0.8em;">Background</label>
+                <input type="color" id="custom-bg-color" style="width: 100%; height: 30px;">
+              </div>
+              <div style="flex: 1;">
+                <label style="font-size: 0.8em;">Text</label>
+                <input type="color" id="custom-text-color" style="width: 100%; height: 30px;">
+              </div>
+            </div>
           </div>
           <div class="setting-group">
             <label>Font</label>
