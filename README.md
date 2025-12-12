@@ -46,6 +46,18 @@ A modern, premium desktop application for viewing text files, built with **Elect
     npm start
     ```
 
+## 📦 Building for Distribution
+
+To create the executable files for Windows (EXE and Zip):
+
+1.  **Build the application**:
+    ```bash
+    npm run make
+    ```
+2.  **Locate the Output**:
+    -   **Installer (EXE)**: `out/make/squirrel.windows/x64/Setup.exe`
+    -   **Portable (Zip)**: `out/make/zip/win32/x64/text-viewer-app-win32-x64-1.0.0.zip`
+
 ## 🏗️ Implementation Details
 
 -   **Main Process (`main.js`)**: Handles window management, native menus, file system operations (read/write), and proper encoding decoding.
