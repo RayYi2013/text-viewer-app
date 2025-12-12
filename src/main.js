@@ -68,10 +68,18 @@ function updateMenu() {
                 },
                 {
                     label: 'Open Recent',
-                    submenu: recentFiles.length > 0 ? recentFiles.map(file => ({
-                        label: file,
-                        click: () => openFile(file)
-                    })) : [{ label: 'No Recent Files', enabled: false }],
+                    submenu: [
+                        ...(recentFiles.length > 0 ? recentFiles.map(file => ({
+                            label: file,
+                            click: () => openFile(file)
+                        })) : [{ label: 'No Recent Files', enabled: false }]),
+                        { type: 'separator' },
+                        {
+                            label: 'Clear Recent',
+                            enabled: recentFiles.length > 0,
+                            click: () => clearRecent()
+                        }
+                    ]
                 },
                 { type: 'separator' },
                 { role: 'quit' }
@@ -103,6 +111,11 @@ function updateMenu() {
     ];
     const menu = Menu.buildFromTemplate(template);
     Menu.setApplicationMenu(menu);
+}
+
+function clearRecent() {
+    store.set('recentFiles', []);
+    updateMenu();
 }
 
 function addToRecent(filePath) {
