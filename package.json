@@ -1,0 +1,20 @@
+{
+    "name": "text-viewer-app",
+    "version": "1.0.0",
+    "description": "A premium text viewer desktop application",
+    "main": "src/main.js",
+    "scripts": {
+        "start": "electron ."
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "electron": "^39.2.7",
+        "electron-store": "^8.1.0"
+    },
+    "dependencies": {
+        "iconv-lite": "^0.7.1",
+        "jschardet": "^3.1.4"
+    }
+}

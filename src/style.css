@@ -1,0 +1,227 @@
+:root {
+  --bg-color: #1E1E1E;
+  --sidebar-color: #252526;
+  --text-color: #D4D4D4;
+  --accent-color: #007ACC;
+  --border-color: #3C3C3C;
+  --font-main: 'Inter', "Microsoft YaHei", "SimHei", "PingFang SC", sans-serif;
+
+  --modal-bg: #2D2D2D;
+  --input-bg: #3C3C3C;
+  --input-text: #E0E0E0;
+}
+
+/* Light Theme */
+body.theme-light {
+  --bg-color: #FFFFFF;
+  --sidebar-color: #F3F3F3;
+  --text-color: #333333;
+  --accent-color: #007ACC;
+  --border-color: #E0E0E0;
+  --modal-bg: #FFFFFF;
+  --input-bg: #F0F0F0;
+  --input-text: #333;
+}
+
+/* Sepia Theme */
+body.theme-sepia {
+  --bg-color: #F4ECD8;
+  --sidebar-color: #E8DEBF;
+  --text-color: #5B4636;
+  --accent-color: #BF9B5F;
+  --border-color: #D4C5A0;
+  --modal-bg: #FAF5E6;
+  --input-bg: #E8DEBF;
+  --input-text: #5B4636;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: var(--font-main);
+  height: 100vh;
+  overflow: hidden;
+  user-select: none;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.toolbar {
+  height: 50px;
+  background-color: var(--sidebar-color);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  -webkit-app-region: drag;
+  transition: background-color 0.3s;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 14px;
+  margin-right: 20px;
+  color: var(--text-color);
+}
+
+.btn-primary {
+  -webkit-app-region: no-drag;
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 6px 16px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  outline: none;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+}
+
+.btn-icon {
+  -webkit-app-region: no-drag;
+  background: none;
+  border: none;
+  color: var(--text-color);
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.btn-icon:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+body.theme-light .btn-icon:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.file-name {
+  margin-left: 20px;
+  font-size: 13px;
+  color: var(--text-color);
+  opacity: 0.7;
+}
+
+.content-area {
+  flex: 1;
+  overflow: auto;
+  padding: 0;
+  position: relative;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(128, 128, 128, 0.4);
+  border-radius: 5px;
+}
+
+.code-block {
+  padding: 40px;
+  font-family: var(--font-main);
+  /* Default, overridden by JS */
+  font-size: 14px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  user-select: text;
+  color: var(--text-color);
+}
+
+.placeholder-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: var(--text-color);
+  opacity: 0.5;
+  font-family: 'Inter', sans-serif;
+  margin-top: 100px;
+}
+
+/* Modal */
+.hidden {
+  display: none !important;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(2px);
+}
+
+.modal-content {
+  background: var(--modal-bg);
+  width: 300px;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--border-color);
+  padding: 20px;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.setting-group {
+  margin-bottom: 20px;
+}
+
+.setting-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+select,
+input[type="range"] {
+  width: 100%;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  background: var(--input-bg);
+  color: var(--input-text);
+  outline: none;
+}

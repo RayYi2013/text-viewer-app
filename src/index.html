@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text Viewer</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Fira+Code:wght@400&family=Merriweather:wght@300;400&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  <div class="app-container">
+    <header class="toolbar">
+      <div class="title">Text Viewer</div>
+      <button id="btn-open" class="btn-primary">Open File</button>
+      <button id="btn-settings" class="btn-icon" title="Settings">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+          <path
+            d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z" />
+          <path
+            d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z" />
+        </svg>
+      </button>
+      <span id="file-name" class="file-name"></span>
+    </header>
+    <main class="content-area">
+      <div id="file-content" class="code-block">
+        <div class="placeholder-text">
+          <p>Open a file to view its content.</p>
+          <p class="sub-text">Supported formats: .txt, .md, .json, .js, .html, .css</p>
+        </div>
+      </div>
+    </main>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="modal hidden">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Settings</h3>
+          <button id="close-settings" class="btn-icon">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="setting-group">
+            <label>Theme</label>
+            <select id="theme-select">
+              <option value="dark">Dark</option>
+              <option value="light">Light</option>
+              <option value="sepia">Sepia</option>
+            </select>
+          </div>
+          <div class="setting-group">
+            <label>Font</label>
+            <select id="font-select">
+              <option value="Inter">Sans Serif (Inter)</option>
+              <option value="Merriweather">Serif (Merriweather)</option>
+              <option value="Fira Code">Monospace (Fira Code)</option>
+              <option value="KaiTi">KaiTi (楷体)</option>
+            </select>
+          </div>
+          <div class="setting-group">
+            <label>Font Size</label>
+            <input type="range" id="font-size-range" min="10" max="48" value="14">
+            <span id="font-size-value">14px</span>
+          </div>
+          <div class="setting-group">
+            <label>Line Height</label>
+            <input type="range" id="line-height-range" min="1.0" max="3.0" step="0.1" value="1.6">
+            <span id="line-height-value">1.6</span>
+          </div>
+          <div class="setting-group">
+            <label>Letter Spacing</label>
+            <input type="range" id="letter-spacing-range" min="-2" max="10" step="0.5" value="0">
+            <span id="letter-spacing-value">0px</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="renderer.js"></script>
+</body>
+
+</html>
