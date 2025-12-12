@@ -84,6 +84,18 @@ function updateMenu() {
                         }
                     ]
                 },
+                {
+                    label: 'Close File',
+                    click: () => mainWindow.webContents.send('app:closeFile')
+                },
+                { type: 'separator' },
+                { role: 'quit' }
+            ]
+        },
+        { role: 'editMenu' },
+        {
+            label: 'View',
+            submenu: [
                 { role: 'reload' },
                 { role: 'forceReload' },
                 { role: 'toggleDevTools' },
@@ -104,7 +116,12 @@ function updateMenu() {
                     label: 'Toggle Toolbar',
                     click: () => mainWindow.webContents.send('app:toggleToolbar')
                 },
-                { role: 'togglefullscreen' }
+                { role: 'togglefullscreen' },
+                { type: 'separator' },
+                {
+                    label: 'Settings',
+                    click: () => mainWindow.webContents.send('app:openSettings')
+                }
             ]
         }
     ];
