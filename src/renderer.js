@@ -160,7 +160,11 @@ function applyLetterSpacing(spacing) {
 function displayFile(filePath, content) {
     const name = filePath.split(/[\\/]/).pop();
     fileNameDisplay.textContent = name;
-    fileContentDiv.textContent = content;
+
+    // Clear previous content (including placeholder structure)
+    fileContentDiv.innerHTML = '';
+    fileContentDiv.textContent = content; // Safely set text content
+
     if (fileContentDiv.classList.contains('placeholder')) {
         fileContentDiv.classList.remove('placeholder');
     }
@@ -200,6 +204,32 @@ window.electronAPI.onSettingsChanged((event, { key, value }) => {
     if (key === 'customTextColor') {
         customTextColorInput.value = value;
         if (themeSelect.value === 'custom') applyTheme('custom', customBgColorInput.value, value);
+    }
+});
+
+// Menu Action Listeners
+window.electronAPI.onOpenSettings(() => {
+    modal.classList.remove('hidden');
+});
+
+window.electronAPI.onCloseFile(() => {
+    fileNameDisplay.textContent = '';
+    fileContentDiv.textContent = '';
+    fileContentDiv.innerHTML = `
+        <div class="placeholder-text">
+          <p>Open a file to view its content.</p>
+          <p class="sub-text">Supported formats: .txt, .md, .json, .js, .html, .css</p>
+        </div>
+    `;
+    fileContentDiv.classList.add('placeholder');
+});
+
+window.electronAPI.onToggleToolbar(() => {
+    const toolbar = document.querySelector('.toolbar');
+    if (toolbar.style.display === 'none') {
+        toolbar.style.display = 'flex';
+    } else {
+        toolbar.style.display = 'none';
     }
 });
 

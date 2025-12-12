@@ -84,14 +84,6 @@ function updateMenu() {
                         }
                     ]
                 },
-                { type: 'separator' },
-                { role: 'quit' }
-            ]
-        },
-        { role: 'editMenu' },
-        {
-            label: 'View',
-            submenu: [
                 { role: 'reload' },
                 { role: 'forceReload' },
                 { role: 'toggleDevTools' },
@@ -108,6 +100,10 @@ function updateMenu() {
                     role: 'zoomOut'
                 },
                 { type: 'separator' },
+                {
+                    label: 'Toggle Toolbar',
+                    click: () => mainWindow.webContents.send('app:toggleToolbar')
+                },
                 { role: 'togglefullscreen' }
             ]
         }

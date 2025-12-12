@@ -9,6 +9,11 @@ contextBridge.exposeInMainWorld('electronAPI', {
     setSettings: (key, value) => ipcRenderer.invoke('settings:set', key, value),
     onSettingsChanged: (callback) => ipcRenderer.on('settings-changed', callback),
 
+    // Menu Actions
+    onOpenSettings: (callback) => ipcRenderer.on('app:openSettings', callback),
+    onCloseFile: (callback) => ipcRenderer.on('app:closeFile', callback),
+    onToggleToolbar: (callback) => ipcRenderer.on('app:toggleToolbar', callback),
+
     // Zoom
     adjustZoom: (delta) => ipcRenderer.invoke('app:adjustZoom', delta)
 });
